@@ -1,4 +1,4 @@
-# Google GenAI Hackathon
+# Artificial-AML
 
 ## Problem statement (Provided by NASSCOM)
 
