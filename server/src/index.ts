@@ -8,23 +8,8 @@ import rootRouter from './routes/root';
 import { notFound, errorHandler } from './middleware/errorHandler';
 
 const app = express();
-
-let port;
-let corsOptions;
-
-if (process.env.NODE_ENV === 'production') {
-    port = process.env.PROD_PORT || 8080;
-    corsOptions = {
-        origin: process.env.PROD_CLIENT,
-        optionsSuccessStatus: 200
-    };
-} else {
-    port = process.env.DEV_PORT || 3000;
-    corsOptions = {
-        origin: process.env.DEV_CLIENT,
-        optionsSuccessStatus: 200
-    };
-}
+const port = process.env.PORT || 3000;
+const corsOptions = { origin: process.env.CLIENT_URL };
 
 // Middleware
 app.set('strict routing', true);
