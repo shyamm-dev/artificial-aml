@@ -29,7 +29,7 @@ Our GenAI platform directly integrates with tools like JIRA to automatically cre
 
 ## Product Pitch
 
-Every new change in a highly compliance regulated environment can be really scary and time consuming to get it right. Our GenAI based platform directly integrates with JIRA and similar tools to automatically generate testcases that are compliant to your chosen standards to reduce your time to market while ensuring its compliant.
+Every new change in a highly compliance regulated environment can be really scary and time consuming to get it right. Our GenAI based platform directly integrates with JIRA and similar tools to automatically generate testcases that are compliant to your chosen standards. This reduces your time to market while ensuring its compliant.
 
 ## Prototype
 
