@@ -10,10 +10,10 @@ docker rm -f $CONTAINER_NAME >/dev/null 2>&1 || true
 
 # Build the Docker image using BuildKit (buildx)
 echo "Building Docker image..."
-DOCKER_BUILDKIT=1 docker build -t artificial-aml-server .
+DOCKER_BUILDKIT=1 docker build -t artificial-aml-server-local .
 # ^ Builds the Docker image using Docker BuildKit for better performance and features, tags as 'artificial-aml-server'.
 
 # Run the Docker container with environment variables from .env
 echo "Running Docker container..."
-docker run --name $CONTAINER_NAME --env-file .env -p 3000:3000 artificial-aml-server
+docker run --pull never --name $CONTAINER_NAME --env-file .env -p 3000:3000 artificial-aml-server-local
 # ^ Runs the container in the foreground, loads environment variables from .env, and maps port 3000.
