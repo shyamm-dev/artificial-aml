@@ -10,7 +10,7 @@ docker rm -f $CONTAINER_NAME >/dev/null 2>&1 || true
 
 # Build the Docker image using BuildKit (buildx)
 echo "Building Docker image..."
-DOCKER_BUILDKIT=1 docker build -t artificial-aml-server-local .
+docker buildx build -t artificial-aml-server-local --platform linux/amd64 .
 # ^ Builds the Docker image using Docker BuildKit for better performance and features, tags as 'artificial-aml-server'.
 
 # Run the Docker container with environment variables from .env

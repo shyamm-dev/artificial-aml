@@ -32,3 +32,35 @@ jobs:
         tags: shyammdev/artificial-aml-registry:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: 'actions/checkout@v4'
+
+    - name:  Google Cloud Authentication
+      uses: 'google-github-actions/auth@v2'
+      with:
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+    - id: 'deploy'
+      name: Deploy to Cloud Run
+      uses: 'google-github-actions/deploy-cloudrun@v2'
+      with:
+        service: ${{ vars.SERVICE_NAME }}
+        region: ${{ vars.REGION }}
+        image: docker.io/shyammdev/artificial-aml-registry:latest
+        env_vars: |-
+          PORT=${{ vars.PORT }}
+          CLIENT_URL=${{ vars.CLIENT_URL }}
+          NODE_ENV=production
+
+    - name: 'Get Service URL'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'
