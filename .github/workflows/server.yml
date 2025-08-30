@@ -1,0 +1,19 @@
+name: Build and deploy server
+on:
+  [workflow_dispatch]
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+  
+    - name: Build the Docker image
+      run: docker build ./server/ --tag shyammdev/artificial-aml-registry:latest
+    
+    - name: Push latest image to registry
+      run: |
+        docker login -u shyammdev -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        docker push shyammdev/artificial-aml-registry:latest
